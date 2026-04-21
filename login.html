@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>ePostal - Login</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #E8470A;
+  --primary-light: #FF6B35;
+  --secondary: #1A2A6C;
+  --accent: #F5A623;
+  --font-head: 'Baloo 2', cursive;
+  --font-body: 'Noto Sans', sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+html, body { height: 100%; font-family: var(--font-body); background: #F4F6FB; overflow: hidden; }
+
+.login-app { height: 100%; display: flex; flex-direction: column; }
+
+/* ONBOARDING SLIDES */
+.onboarding { flex: 1; overflow: hidden; display: flex; flex-direction: column; }
+.slides { display: flex; transition: transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94); }
+.slide { min-width: 100vw; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 30px; text-align: center; }
+.slide-1 { background: linear-gradient(160deg, var(--secondary) 0%, #2D3F8A 50%, var(--primary) 100%); }
+.slide-2 { background: linear-gradient(160deg, #0F4C75, #1B6CA8, var(--primary)); }
+.slide-3 { background: linear-gradient(160deg, #1A2A6C, var(--primary), var(--accent)); }
+.slide-emoji { font-size: 80px; margin-bottom: 20px; }
+.slide-title { font-family: var(--font-head); font-size: 28px; font-weight: 800; color: white; margin-bottom: 12px; line-height: 1.2; }
+.slide-sub { color: rgba(255,255,255,0.75); font-size: 15px; line-height: 1.6; max-width: 280px; }
+
+/* DOTS */
+.dots { display: flex; gap: 8px; justify-content: center; padding: 20px; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.3); cursor: pointer; transition: all 0.3s; }
+.dot.active { width: 24px; border-radius: 4px; background: var(--primary); }
+
+/* BOTTOM */
+.login-bottom { background: white; border-radius: 24px 24px 0 0; padding: 24px 24px 36px; box-shadow: 0 -4px 20px rgba(0,0,0,0.1); }
+.login-title { font-family: var(--font-head); font-size: 22px; font-weight: 800; margin-bottom: 4px; }
+.login-sub { color: #6B7280; font-size: 13px; margin-bottom: 20px; }
+
+.tab-row { display: flex; background: #F4F6FB; border-radius: 10px; padding: 4px; gap: 4px; margin-bottom: 16px; }
+.tab-btn { flex: 1; padding: 8px; font-size: 13px; font-weight: 700; border: none; border-radius: 8px; cursor: pointer; font-family: var(--font-body); background: transparent; color: #6B7280; transition: all 0.2s; }
+.tab-btn.active { background: var(--primary); color: white; box-shadow: 0 2px 8px rgba(232,71,10,0.3); }
+
+.form-group { margin-bottom: 12px; }
+.form-input {
+  width: 100%;
+  border: 2px solid #E5E7EB;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 14px;
+  font-family: var(--font-body);
+  outline: none;
+  transition: border-color 0.2s;
+  background: #FAFAFA;
+}
+.form-input:focus { border-color: var(--primary); background: white; }
+
+.btn-login {
+  width: 100%;
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 14px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: var(--font-body);
+  box-shadow: 0 4px 14px rgba(232,71,10,0.4);
+  margin-top: 8px;
+  transition: transform 0.2s;
+}
+.btn-login:active { transform: scale(0.98); }
+
+.divider { display: flex; align-items: center; gap: 10px; margin: 14px 0; }
+.divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: #E5E7EB; }
+.divider span { color: #6B7280; font-size: 12px; }
+
+.social-btns { display: flex; gap: 10px; }
+.social-btn { flex: 1; padding: 10px; border: 2px solid #E5E7EB; border-radius: 10px; background: white; font-size: 20px; cursor: pointer; }
+
+.signup-form { display: none; }
+.signup-form.active { display: block; }
+.login-form.active { display: block; }
+.login-form { display: none; }
+
+.skip-btn { position: absolute; top: 16px; right: 16px; background: rgba(255,255,255,0.2); border: none; color: white; font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 20px; cursor: pointer; }
+</style>
+</head>
+<body>
+
+<div class="login-app">
+
+  <!-- ONBOARDING -->
+  <div class="onboarding" id="onboarding">
+    <div style="position:relative;flex:1;overflow:hidden">
+      <button class="skip-btn" onclick="goToLogin()">Skip →</button>
+      <div class="slides" id="slidesEl">
+        <div class="slide slide-1">
+          <div class="slide-emoji">📮</div>
+          <h1 class="slide-title">Crack Your<br>Postal Exam!</h1>
+          <p class="slide-sub">India's #1 platform for departmental promotion exams. 50,000+ students promoted.</p>
+        </div>
+        <div class="slide slide-2">
+          <div class="slide-emoji">🎥</div>
+          <h1 class="slide-title">Learn Anytime,<br>Anywhere</h1>
+          <p class="slide-sub">Video lectures, PDF notes, mock tests — everything you need in one app.</p>
+        </div>
+        <div class="slide slide-3">
+          <div class="slide-emoji">🏆</div>
+          <h1 class="slide-title">Compete &<br>Get Promoted!</h1>
+          <p class="slide-sub">Daily quizzes, leaderboards, and personalized study plans to keep you on track.</p>
+        </div>
+      </div>
+    </div>
+    <div class="dots" id="dotsEl">
+      <div class="dot active" onclick="goSlide(0)"></div>
+      <div class="dot" onclick="goSlide(1)"></div>
+      <div class="dot" onclick="goSlide(2)"></div>
+    </div>
+    <div style="padding: 0 24px 24px; display:flex; gap:10px;">
+      <button onclick="prevSlide()" style="flex:1;padding:12px;border:2px solid #E5E7EB;border-radius:10px;background:white;font-weight:700;cursor:pointer;font-size:14px" id="prevBtn">← Back</button>
+      <button onclick="nextSlide()" id="nextBtn" style="flex:2;padding:12px;background:linear-gradient(135deg,#E8470A,#FF6B35);color:white;border:none;border-radius:10px;font-weight:700;cursor:pointer;font-size:14px;box-shadow:0 4px 14px rgba(232,71,10,0.4)">Next →</button>
+    </div>
+  </div>
+
+  <!-- LOGIN FORM (hidden initially) -->
+  <div id="loginSection" style="display:none;flex:1;overflow-y:auto">
+    <div style="background:linear-gradient(135deg,var(--secondary),var(--primary));padding:50px 24px 80px;text-align:center">
+      <div style="font-size:48px;margin-bottom:8px">📮</div>
+      <div style="font-family:var(--font-head);font-size:28px;font-weight:800;color:white">ePostal</div>
+      <div style="color:rgba(255,255,255,0.7);font-size:13px">Coaching Platform</div>
+    </div>
+    <div class="login-bottom" style="margin-top:-24px">
+      <div class="login-title">Welcome Back! 👋</div>
+      <div class="login-sub">Login or Sign Up to continue</div>
+
+      <div class="tab-row">
+        <button class="tab-btn active" onclick="switchTab(this,'login')">Login</button>
+        <button class="tab-btn" onclick="switchTab(this,'signup')">Sign Up</button>
+      </div>
+
+      <!-- LOGIN FORM -->
+      <div class="login-form active" id="loginForm">
+        <div class="form-group">
+          <input type="tel" placeholder="Mobile Number" class="form-input" maxlength="10">
+        </div>
+        <div class="form-group">
+          <input type="password" placeholder="Password" class="form-input">
+        </div>
+        <div style="text-align:right;margin-bottom:8px"><a href="#" style="color:var(--primary);font-size:12px;font-weight:600">Forgot Password?</a></div>
+        <button class="btn-login" onclick="window.location.href='index.html'">Login →</button>
+        <div class="divider"><span>or continue with</span></div>
+        <div class="social-btns">
+          <button class="social-btn" onclick="window.location.href='index.html'">🇬</button>
+          <button class="social-btn" onclick="window.location.href='index.html'">📱</button>
+        </div>
+      </div>
+
+      <!-- SIGNUP FORM -->
+      <div class="signup-form" id="signupForm">
+        <div class="form-group"><input type="text" placeholder="Full Name" class="form-input"></div>
+        <div class="form-group"><input type="tel" placeholder="Mobile Number" class="form-input" maxlength="10"></div>
+        <div class="form-group"><input type="email" placeholder="Email Address" class="form-input"></div>
+        <div class="form-group"><input type="password" placeholder="Create Password" class="form-input"></div>
+        <div class="form-group">
+          <select class="form-input">
+            <option value="">Select Your Post</option>
+            <option>GDS</option>
+            <option>MTS</option>
+            <option>Postman</option>
+            <option>Mail Guard</option>
+            <option>PA/SA</option>
+            <option>Inspector</option>
+          </select>
+        </div>
+        <button class="btn-login" onclick="window.location.href='index.html'">Create Account →</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+let slideIdx = 0;
+const totalSlides = 3;
+
+function goSlide(n) {
+  slideIdx = n;
+  document.getElementById('slidesEl').style.transform = `translateX(-${n * 100}vw)`;
+  document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === n));
+  document.getElementById('prevBtn').style.opacity = n === 0 ? '0.4' : '1';
+  document.getElementById('nextBtn').textContent = n === totalSlides - 1 ? 'Get Started →' : 'Next →';
+}
+
+function nextSlide() {
+  if (slideIdx < totalSlides - 1) { goSlide(slideIdx + 1); }
+  else { goToLogin(); }
+}
+function prevSlide() {
+  if (slideIdx > 0) goSlide(slideIdx - 1);
+}
+function goToLogin() {
+  document.getElementById('onboarding').style.display = 'none';
+  document.getElementById('loginSection').style.display = 'block';
+}
+function switchTab(btn, tab) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('loginForm').classList.toggle('active', tab === 'login');
+  document.getElementById('signupForm').classList.toggle('active', tab === 'signup');
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>ePostal Coaching</title>
+<link rel="stylesheet" href="css/main.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- SPLASH SCREEN -->
+<div id="splash" class="splash">
+  <div class="splash-logo">
+    <div class="splash-icon">📮</div>
+    <h1>ePostal</h1>
+    <p>Coaching</p>
+  </div>
+  <div class="splash-tagline">Sabse Zyada Promotions!</div>
+  <div class="splash-loader"><div class="loader-bar"></div></div>
+</div>
+
+<!-- MAIN APP -->
+<div id="app" class="app hidden">
+
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <button class="icon-btn" id="menuBtn">☰</button>
+      <div class="logo-small">📮 ePostal</div>
+    </div>
+    <div class="topbar-right">
+      <button class="icon-btn notif-btn" onclick="showPage('notifications')">
+        🔔<span class="badge">3</span>
+      </button>
+      <button class="avatar-btn" onclick="showPage('profile')">
+        <div class="avatar">K</div>
+      </button>
+    </div>
+  </header>
+
+  <!-- SIDE DRAWER -->
+  <div id="drawer" class="drawer hidden">
+    <div class="drawer-header">
+      <div class="drawer-avatar">K</div>
+      <div>
+        <div class="drawer-name">Keshav</div>
+        <div class="drawer-email">keshav@example.com</div>
+      </div>
+      <button class="close-drawer" id="closeDrawer">✕</button>
+    </div>
+    <nav class="drawer-nav">
+      <a href="#" class="drawer-item active" onclick="showPage('home');closeDrawerFn()">🏠 Home</a>
+      <a href="#" class="drawer-item" onclick="showPage('courses');closeDrawerFn()">📚 All Courses</a>
+      <a href="#" class="drawer-item" onclick="showPage('myCourses');closeDrawerFn()">🎓 My Courses</a>
+      <a href="#" class="drawer-item" onclick="showPage('tests');closeDrawerFn()">📝 Mock Tests</a>
+      <a href="#" class="drawer-item" onclick="showPage('pyq');closeDrawerFn()">📄 PYQ Papers</a>
+      <a href="#" class="drawer-item" onclick="showPage('notes');closeDrawerFn()">📖 Notes</a>
+      <a href="#" class="drawer-item" onclick="showPage('leaderboard');closeDrawerFn()">🏆 Leaderboard</a>
+      <a href="#" class="drawer-item" onclick="showPage('doubts');closeDrawerFn()">💬 Doubt Forum</a>
+      <a href="#" class="drawer-item" onclick="showPage('schedule');closeDrawerFn()">📅 Study Planner</a>
+      <a href="#" class="drawer-item" onclick="showPage('profile');closeDrawerFn()">👤 Profile</a>
+      <a href="#" class="drawer-item logout" onclick="showSplash()">🚪 Logout</a>
+    </nav>
+  </div>
+  <div id="drawerOverlay" class="drawer-overlay hidden" onclick="closeDrawerFn()"></div>
+
+  <!-- PAGE CONTAINER -->
+  <div class="pages">
+
+    <!-- HOME PAGE -->
+    <div id="page-home" class="page active">
+      <div class="scroll-content">
+
+        <!-- WELCOME BANNER -->
+        <div class="hero-banner">
+          <div class="hero-text">
+            <div class="hero-greeting">Namaste, Keshav! 👋</div>
+            <h2>Crack Your<br><span class="hero-highlight">Departmental Exam</span></h2>
+            <p>50,000+ students promoted with ePostal</p>
+            <button class="btn-primary" onclick="showPage('courses')">Explore Courses →</button>
+          </div>
+          <div class="hero-img">📮</div>
+        </div>
+
+        <!-- STREAK CARD -->
+        <div class="streak-card">
+          <div class="streak-left">
+            <div class="streak-num">🔥 7</div>
+            <div class="streak-label">Day Streak</div>
+          </div>
+          <div class="streak-divider"></div>
+          <div class="streak-mid">
+            <div class="streak-num">42%</div>
+            <div class="streak-label">Course Done</div>
+          </div>
+          <div class="streak-divider"></div>
+          <div class="streak-right">
+            <div class="streak-num">12</div>
+            <div class="streak-label">Tests Taken</div>
+          </div>
+        </div>
+
+        <!-- CONTINUE LEARNING -->
+        <div class="section">
+          <div class="section-header">
+            <h3>Continue Learning</h3>
+            <a href="#" onclick="showPage('myCourses')" class="see-all">See All</a>
+          </div>
+          <div class="continue-card" onclick="showPage('lesson')">
+            <div class="continue-icon">📬</div>
+            <div class="continue-info">
+              <div class="continue-title">PA & SA Full Course</div>
+              <div class="continue-sub">Chapter 5: Mail Operations</div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width:42%"></div>
+              </div>
+              <div class="progress-text">42% Complete</div>
+            </div>
+            <button class="play-btn">▶</button>
+          </div>
+        </div>
+
+        <!-- CATEGORIES -->
+        <div class="section">
+          <h3>Categories</h3>
+          <div class="cat-grid">
+            <div class="cat-card" onclick="filterCourses('Full Courses');showPage('courses')">
+              <div class="cat-icon">🎥</div>
+              <div class="cat-label">Full Courses</div>
+            </div>
+            <div class="cat-card" onclick="filterCourses('Mock Tests');showPage('tests')">
+              <div class="cat-icon">📝</div>
+              <div class="cat-label">Mock Tests</div>
+            </div>
+            <div class="cat-card" onclick="filterCourses('Notes');showPage('notes')">
+              <div class="cat-icon">📖</div>
+              <div class="cat-label">Notes</div>
+            </div>
+            <div class="cat-card" onclick="filterCourses('PYQ');showPage('pyq')">
+              <div class="cat-icon">📄</div>
+              <div class="cat-label">PYQ Papers</div>
+            </div>
+            <div class="cat-card" onclick="showPage('schedule')">
+              <div class="cat-icon">📅</div>
+              <div class="cat-label">Study Plan</div>
+            </div>
+            <div class="cat-card" onclick="showPage('doubts')">
+              <div class="cat-icon">💬</div>
+              <div class="cat-label">Ask Doubt</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BEST SELLING COURSES -->
+        <div class="section">
+          <div class="section-header">
+            <h3>Best Selling 🔥</h3>
+            <a href="#" onclick="showPage('courses')" class="see-all">See All</a>
+          </div>
+          <div class="courses-scroll">
+            <div class="course-card-h" onclick="showPage('courseDetail')">
+              <div class="course-thumb">📬</div>
+              <div class="course-info-h">
+                <div class="course-tag">Full Course</div>
+                <div class="course-name-h">GDS to MTS</div>
+                <div class="course-price-h"><span class="price-new">₹1,299</span> <span class="price-old">₹1,599</span></div>
+                <div class="course-rating">⭐ 4.8 · 3.2k students</div>
+              </div>
+            </div>
+            <div class="course-card-h" onclick="showPage('courseDetail')">
+              <div class="course-thumb">✉️</div>
+              <div class="course-info-h">
+                <div class="course-tag">Full Course</div>
+                <div class="course-name-h">Postman & Mail Guard</div>
+                <div class="course-price-h"><span class="price-new">₹1,399</span> <span class="price-old">₹1,799</span></div>
+                <div class="course-rating">⭐ 4.9 · 4.1k students</div>
+              </div>
+            </div>
+            <div class="course-card-h" onclick="showPage('courseDetail')">
+              <div class="course-thumb">🏛️</div>
+              <div class="course-info-h">
+                <div class="course-tag">Full Course</div>
+                <div class="course-name-h">PA & SA Complete</div>
+                <div class="course-price-h"><span class="price-new">₹1,799</span> <span class="price-old">₹2,299</span></div>
+                <div class="course-rating">⭐ 4.7 · 5k students</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DAILY QUIZ -->
+        <div class="section">
+          <div class="quiz-banner" onclick="showPage('dailyQuiz')">
+            <div>
+              <div class="quiz-label">Daily Challenge 🧠</div>
+              <div class="quiz-title">Test your knowledge!</div>
+              <div class="quiz-sub">5 Questions · 5 min</div>
+            </div>
+            <button class="btn-white">Start →</button>
+          </div>
+        </div>
+
+        <!-- TOPPERS -->
+        <div class="section">
+          <div class="section-header">
+            <h3>🏆 Top Performers</h3>
+            <a href="#" onclick="showPage('leaderboard')" class="see-all">Full Board</a>
+          </div>
+          <div class="toppers-list">
+            <div class="topper-item">
+              <div class="topper-rank gold">1</div>
+              <div class="topper-av">R</div>
+              <div class="topper-info"><div class="topper-name">Ravi Kumar</div><div class="topper-score">98.5%</div></div>
+              <div class="topper-badge">🥇</div>
+            </div>
+            <div class="topper-item">
+              <div class="topper-rank silver">2</div>
+              <div class="topper-av">P</div>
+              <div class="topper-info"><div class="topper-name">Priya Sharma</div><div class="topper-score">97.2%</div></div>
+              <div class="topper-badge">🥈</div>
+            </div>
+            <div class="topper-item">
+              <div class="topper-rank bronze">3</div>
+              <div class="topper-av">A</div>
+              <div class="topper-info"><div class="topper-name">Amit Singh</div><div class="topper-score">96.8%</div></div>
+              <div class="topper-badge">🥉</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="height:80px"></div>
+      </div>
+    </div>
+
+    <!-- COURSES PAGE -->
+    <div id="page-courses" class="page">
+      <div class="page-header-bar">
+        <button class="back-btn" onclick="goBack()">←</button>
+        <h2>All Courses</h2>
+        <button class="icon-btn" onclick="toggleSearch()">🔍</button>
+      </div>
+      <div id="searchBar" class="search-bar hidden">
+        <input type="text" placeholder="Search courses..." class="search-input" id="searchInput" oninput="searchCourses(this.value)">
+      </div>
+      <div class="filter-tabs" id="filterTabs">
+        <button class="filter-tab active" onclick="filterTab(this,'all')">All</button>
+        <button class="filter-tab" onclick="filterTab(this,'full')">Full Courses</button>
+        <button class="filter-tab" onclick="filterTab(this,'mock')">Mock Tests</button>
+        <button class="filter-tab" onclick="filterTab(this,'notes')">Notes</button>
+        <button class="filter-tab" onclick="filterTab(this,'pyq')">PYQ</button>
+        <button class="filter-tab" onclick="filterTab(this,'combo')">COMBO</button>
+      </div>
+      <div class="scroll-content" style="padding-top:0">
+        <div class="courses-grid" id="coursesGrid">
+          <!-- Generated by JS -->
+        </div>
+        <div style="height:80px"></div>
+      </div>
+    </div>
+
+    <!-- COURSE DETAIL PAGE -->
+    <div id="page-courseDetail" class="page">
+      <div class="page-header-bar">
+        <button class="back-btn" onclick="goBack()">←</button>
+        <h2>Course Detail</h2>
+        <button class="icon-btn">❤️</button>
+      </div>
+      <div class="scroll-content" style="padding-top:0">
+        <div class="course-detail-hero">
+          <div class="course-detail-thumb">📬</div>
+          <div class="course-detail-overlay">
+            <div class="cd-tag">Full Course</div>
+            <h2 class="cd-title">PA & SA Complete Course</h2>
+            <div class="cd-meta">⭐ 4.7 · 5,000 students · 12 hrs</div>
+          </div>
+        </div>
+        <div class="cd-body">
+          <div class="cd-price-row">
+            <div><span class="cd-price">₹1,799</span> <span class="cd-old">₹2,299</span> <span class="cd-disc">22% OFF</span></div>
+            <button class="btn-primary small" onclick="showPage('lesson')">Buy Now</button>
+          </div>
+          <div class="cd-tabs">
+            <button class="cd-tab active" onclick="switchCdTab(this,'overview')">Overview</button>
+            <button class="cd-tab" onclick="switchCdTab(this,'curriculum')">Curriculum</button>
+            <button class="cd-tab" onclick="switchCdTab(this,'reviews')">Reviews</button>
+          </div>
+          <div id="cd-overview" class="cd-tab-content active">
+            <h4>What you'll learn</h4>
+            <ul class="learn-list">
+              <li>✅ Complete PA/SA syllabus coverage</li>
+              <li>✅ Previous Year Questions analysis</li>
+              <li>✅ Mock test series with solutions</li>
+              <li>✅ PDF notes for quick revision</li>
+              <li>✅ Live doubt clearing sessions</li>
+            </ul>
+            <h4>About Course</h4>
+            <p class="cd-desc">This comprehensive course covers all topics for the PA & SA departmental promotion exam. Taught by experienced postal department educators with years of exam coaching experience.</p>
+          </div>
+          <div id="cd-curriculum" class="cd-tab-content">
+            <div class="curriculum-item" onclick="showPage('lesson')">
+              <div class="ci-num">01</div>
+              <div class="ci-info"><div class="ci-title">Introduction to Postal Services</div><div class="ci-meta">Video · 45 min</div></div>
+              <div class="ci-lock">▶</div>
+            </div>
+            <div class="curriculum-item" onclick="showPage('lesson')">
+              <div class="ci-num">02</div>
+              <div class="ci-info"><div class="ci-title">Mail Operations</div><div class="ci-meta">Video · 60 min</div></div>
+              <div class="ci-lock">▶</div>
+            </div>
+            <div class="curriculum-item">
+              <div class="ci-num">03</div>
+              <div class="ci-info"><div class="ci-title">Savings Schemes</div><div class="ci-meta">Video · 55 min</div></div>
+              <div class="ci-lock">🔒</div>
+            </div>
+            <div class="curriculum-item">
+              <div class="ci-num">04</div>
+              <div class="ci-info"><div class="ci-title">IT Modernization</div><div class="ci-meta">Video · 70 min</div></div>
+              <div class="ci-lock">🔒</div>
+            </div>
+            <div class="curriculum-item">
+              <div class="ci-num">05</div>
+              <div class="ci-info"><div class="ci-title">DOP Maths</div><div class="ci-meta">Video · 90 min</div></div>
+              <div class="ci-lock">🔒</div>
+            </div>
+          </div>
+          <div id="cd-reviews" class="cd-tab-content">
+            <div class="rating-big">
+              <div class="rating-num">4.7</div>
+              <div class="rating-stars">⭐⭐⭐⭐⭐</div>
+              <div class="rating-count">5,000 ratings</div>
+            </div>
+            <div class="review-item">
+              <div class="review-av">R</div>
+              <div class="review-body"><div class="review-name">Ravi Kumar ⭐⭐⭐⭐⭐</div><div class="review-text">Best course for PA exam! Got promoted after studying from here. Very detailed content.</div></div>
+            </div>
+            <div class="review-item">
+              <div class="review-av">S</div>
+              <div class="review-body"><div class="review-name">Sunita Devi ⭐⭐⭐⭐</div><div class="review-text">Good material, notes are very helpful. Would recommend to everyone preparing for postal exams.</div></div>
+            </div>
+          </div>
+        </div>
+        <div style="height:100px"></div>
+      </div>
+    </div>
+
+    <!-- LESSON / VIDEO PAGE -->
+    <div id="page-lesson" class="page">
+      <div class="page-header-bar dark">
+        <button class="back-btn light" onclick="goBack()">←</button>
+        <h2 class="light-text">Now Playing</h2>
+        <button class="icon-btn light-text">⋮</button>
+      </div>
+      <div class="video-player">
+        <div class="video-placeholder">
+          <div class="video-icon">▶</div>
+          <div class="video-title">Mail Operations - Chapter 5</div>
+        </div>
+        <div class="video-controls">
+          <div class="vc-bar">
+            <div class="vc-fill" style="width:35%"></div>
+          </div>
+          <div class="vc-row">
+            <span class="vc-time">18:30</span>
+            <div class="vc-btns">
+              <button class="vc-btn">⏮</button>
+              <button class="vc-btn play">⏸</button>
+              <button class="vc-btn">⏭</button>
+            </div>
+            <span class="vc-time">52:00</span>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-content lesson-content">
+        <h3 class="lesson-title">Chapter 5: Mail Operations</h3>
+        <div class="lesson-tabs">
+          <button class="lesson-tab active" onclick="switchLessonTab(this,'notes')">Notes</button>
+          <button class="lesson-tab" onclick="switchLessonTab(this,'chapters')">Chapters</button>
+          <button class="lesson-tab" onclick="switchLessonTab(this,'discuss')">Discuss</button>
+        </div>
+        <div id="lt-notes" class="lt-content active">
+          <div class="note-card">
+            <h4>Key Points:</h4>
+            <ul>
+              <li>Mail processing flow at post offices</li>
+              <li>Types of mail: First class, Second class</li>
+              <li>Speed Post procedures</li>
+              <li>Registered articles handling</li>
+              <li>Delivery confirmation process</li>
+            </ul>
+          </div>
+          <button class="btn-outline" onclick="showPage('notes')">📥 Download Notes PDF</button>
+        </div>
+        <div id="lt-chapters" class="lt-content">
+          <div class="chapter-list">
+            <div class="chapter-item done">✅ Ch.1 - Introduction</div>
+            <div class="chapter-item done">✅ Ch.2 - Postal History</div>
+            <div class="chapter-item done">✅ Ch.3 - Organisation Structure</div>
+            <div class="chapter-item done">✅ Ch.4 - Post Office Types</div>
+            <div class="chapter-item current">▶ Ch.5 - Mail Operations</div>
+            <div class="chapter-item locked">🔒 Ch.6 - Savings Schemes</div>
+            <div class="chapter-item locked">🔒 Ch.7 - IT Modernization</div>
+          </div>
+        </div>
+        <div id="lt-discuss" class="lt-content">
+          <div class="doubt-input-area">
+            <textarea placeholder="Ask your doubt about this lecture..." class="doubt-input"></textarea>
+            <button class="btn-primary small">Post</button>
+          </div>
+          <div class="doubt-item">
+            <div class="doubt-q">Q: What is the difference between Speed Post and Registered Post?</div>
+            <div class="doubt-a">A: Speed Post guarantees delivery within 1-3 days with tracking, while Registered Post acknowledges delivery but has longer transit time.</div>
+          </div>
+        </div>
+        <div style="height:80px"></div>
+      </div>
+    </div>
+
+    <!-- MOCK TESTS PAGE -->
+    <div id="page-tests" class="page">
+      <div class="page-header-bar">
+        <button class="back-btn" onclick="goBack()">←</button>
+        <h2>Mock Tests</h2>
+      </div>
+      <div class="scroll-content">
+        <div class="test-stats-row">
+          <div class="test-stat"><div class="ts-num">12</div><div class="ts-label">Tests Taken</div></div>
+          <div class="test-stat"><div class="ts-num">78%</div><div class="ts-label">Avg Score</div></div>
+          <div class="test-stat"><div class="ts-num">3</div><div class="ts-label">Rank</div></div>
+        </div>
+        <h4 class="section-label">Available Tests</h4>
+        <div class="test-card" onclick="showPage('quiz')">
+          <div class="tc-left">
+            <div class="tc-icon">📝</div>
+            <div class="tc-info">
+              <div class="tc-title">MTS + Postman Full Test</div>
+              <div class="tc-meta">100 Questions · 90 min · Hard</div>
+            </div>
+          </div>
+          <button class="btn-primary small">Start</button>
+        </div>
+        <div class="test-card" onclick="showPage('quiz')">
+          <div class="tc-left">
+            <div class="tc-icon">📝</div>
+            <div class="tc-info">
+              <div class="tc-title">PA/SA Practice Test 1</div>
+              <div class="tc-meta">50 Questions · 45 min · Medium</div>
+            </div>
+          </div>
+          <button class="btn-primary small">Start</button>
+        </div>
+        <div class="test-card" onclick="showPage('quiz')">
+          <div class="tc-left">
+            <div class="tc-icon">📝</div>
+            <div class="tc-info">
+              <div class="tc-title">GDS to MTS Mock Test</div>
+              <div class="tc-meta">75 Questions · 60 min · Easy</div>
+            </div>
+          </div>
+          <button class="btn-primary small">Start</button>
+        </div>
+        <div class="test-card locked">
+          <div class="tc-left">
+            <div class="tc-icon">🔒</div>
+            <div class="tc-info">
+              <div class="tc-title">Inspector Post Full Mock</div>
+              <div class="tc-meta">150 Questions · 120 min · Expert</div>
+            </div>
+          </div>
+          <button class="btn-outline small" onclick="showPage('courseDetail')">Buy</button>
+        </div>
+        <h4 class="section-label">Previous Results</h4>
+        <div class="result-card">
+          <div class="rc-info"><div class="rc-title">MTS Mock Test #3</div><div class="rc-date">2 days ago</div></div>
+          <div class="rc-score good">82%</div>
+        </div>
+        <div class="result-card">
+          <div class="rc-info"><div class="rc-title">PA/SA Practice Test</div><div class="rc-date">5 days ago</div></div>
+          <div class="rc-score ok">71%</div>
+        </div>
+        <div style="height:80px"></div>
+      </div>
+    </div>
+
+    <!-- QUIZ PAGE -->
+    <div id="page-quiz" class="page">
+      <div class="page-header-bar">
+        <button class="back-btn" onclick="goBack()">←</button>
+        <h2>Mock Test</h2>
+        <div class="quiz-timer" id="quizTimer">45:00</div>
+      </div>
+      <div class="scroll-content">
+        <div class="quiz-progress">
+          <div class="qp-text">Question <span id="qNum">1</span> of 10</div>
+          <div class="qp-bar"><div class="qp-fill" id="qpFill" style="width:10%"></div></div>
+        </div>
+        <div class="question-card">
+          <div class="q-text" id="questionText">Which article of the Indian Post Office Act deals with the exclusive privilege of the Government?</div>
+          <div class="options-list" id="optionsList">
+            <button class="option-btn" onclick="selectOption(this,false)">Article 4</button>
+            <button class="option-btn" onclick="selectOption(this,true)">Article 4 of the Indian Post Office Act 1898</button>
+            <button class="option-btn" onclick="selectOption(this,false)">Section 6</button>
+            <button class="option-btn" onclick="selectOption(this,false)">Rule 7</button>
+          </div>
+        </div>
+        <div class="quiz-nav">
+          <button class="btn-outline" onclick="prevQ()">← Prev</button>
+          <button class="btn-primary" id="nextBtn" onclick="nextQ()">Next →</button>
+        </div>
+        <div style="height:80px"></div>
+      </div>
+    </div>
+
+    <!-- DAILY QUIZ PAGE -->
+    <div id="page-dailyQuiz" class="page">
+      <div class="page-header-bar">
+        <button class="back-btn" onclick="goBack()">←</button>
+        <h2>Daily Challenge 🧠</h2>
+        <div class="quiz-timer" id="dailyTimer">5:00</div>
+      </div>
+      <div class="scroll-content">
+        <div class="daily-quiz-header">
+          <div class="dq-streak">🔥 7 Day Streak!</div>
+          <div class="dq-points">+50 pts on completion</div>
+        </div>
+        <div class="quiz-progress">
+          <div class="qp-text">Question 1 of 5</div>
+          <div class="qp-bar"><div class="qp-fill" style="width:20%"></div></div>
+        </div>
+        <div class="question-card">
+          <div class="q-text">What does 'SPCC' stand for in postal terminology?</div>
+          <div class="options-list">
+            <button class="option-btn" onclick="selectOption(this,false)">Speed Post Central Command</button>
+            <button class="option-btn" onclick="selectOption(this,true)">Speed Post Customised Conditions</button>
+            <button class="option-btn" onclick="selectOption(this,false)">Special Parcel Clearance Centre</button>
+            <button class="option-btn" onclick="selectOption(this,false)">Savings Post Currency Centre</button>
+          </div>
+        </div>
+        <div class="quiz-nav">
+          <button class="btn-outline">← Prev</button>
+          <button class="btn-primary">Next →</button>
+        </div>
+        <div style="height:80px"></div>
+      </div>
+    </div>
+
+    <!-- NOTES PAGE -->
+    <div id="page-notes" class="page">
+      <div class="page-header-bar">
+        <button class="back-btn" onclick="goBack()">←</button>
+        <h2>Study Notes</h2>
+      </div>
+      <div class="scroll-content">
+        <div class="note-file-card">
+          <div class="nf-icon">📄</div>
+          <div class="nf-info"><div class="nf-title">PA/SA Complete Notes</div><div class="nf-meta">PDF · 120 pages · 8.2 MB</div></div>
+          <button class="btn-primary small">📥</button>
+        </div>
+        <div class="note-file-card">
+          <div class="nf-icon">📄</div>
+          <div class="nf-info"><div class="nf-title">MTS Notes</div><div class="nf-meta">PDF · 85 pages · 5.4 MB</div></div>
+          <button class="btn-primary small">📥</button>
+        </div>
+        <div class="note-file-card">
+          <div class="nf-icon">📄</div>
+          <div class="nf-info"><div class="nf-title">Postman/MG Notes</div><div class="nf-meta">PDF · 95 pages · 6.1 MB</div></div>
+          <button class="btn-primary small">📥</button>
+        </div>
+        <div class="note-file-card locked">
+          <div class="nf-icon">🔒</div>
+          <div class="nf-info"><div class="nf-title">Inspector Post Notes</div><div class="nf-meta">PDF · 200 pages · Premium</div></div>
+          <button class="btn-outline small" onclick="showPage('courseDetail')">Buy</button>
+        </div>
+        <div style="height:80px"></div>
+      </div>
+    </div>
+
+    <!-- PYQ PAGE -->
+    <div id="page-pyq" class="page">
+      <div class="page-header-bar">
+        <button class="back-btn" onclick="goBack()">←</button>
+        <h2>Previous Year Papers</h2>
+      </div>
+      <div class="scroll-content">
+        <div class="pyq-card" onclick="showPage('quiz')">
+          <div class="pyq-year">2023</div>
+          <div class="pyq-info"><div class="pyq-title">Postman 30 PYQs</div><div class="pyq-meta">30 Papers · PDF + Quiz Mode</div></div>
+          <div class="pyq-arrow">→</div>
+        </div>
+        <div class="pyq-card" onclick="showPage('quiz')">
+          <div class="pyq-year">2022</div>
+          <div class="pyq-info"><div class="pyq-title">MTS 30 PYQs</div><div class="pyq-meta">30 Papers · PDF + Quiz Mode</div></div>
+          <div class="pyq-arrow">→</div>
+        </div>
+        <div class="pyq-card" onclick="showPage('quiz')">
+          <div class="pyq-year">2023</div>
+          <div class="pyq-info"><div class="pyq-title">PA 30 PYQs</div><div class="pyq-meta">30 Papers · PDF + Quiz Mode</div></div>
+          <div class="pyq-arrow">→</div>
+        </div>
+        <div style="height:80px"></div>
+      </div>
+    </div>
+
+    <!-- LEADERBOARD PAGE -->
+    <div id="page-leaderboard" class="page">
+      <div class="page-header-bar">
+        <button class="back-btn" onclick="goBack()">←</button>
+        <h2>Leaderboard 🏆</h2>
+      </div>
+      <div class="scroll-content">
+        <div class="lb-tabs">
+          <button class="lb-tab active">This Week</button>
+          <button class="lb-tab">This Month</button>
+          <button class="lb-tab">All Time</button>
+        </div>
+        <div class="podium">
+          <div class="podium-2">
+            <div class="p-av">P</div>
+            <div class="p-name">Priya</div>
+            <div class="p-score">97.2%</div>
+            <div class="p-bar p-2">2</div>
+          </div>
+          <div class="podium-1">
+            <div class="p-crown">👑</div>
+            <div class="p-av gold">R</div>
+            <div class="p-name">Ravi</div>
+            <div class="p-score">98.5%</div>
+            <div class="p-bar p-1">1</div>
+          </div>
+          <div class="podium-3">
+            <div class="p-av">A</div>
+            <div class="p-name">Amit</div>
+            <div class="p-score">96.8%</div>
+            <div class="p-bar p-3">3</div>
+          </div>
+        </div>
+        <div class="lb-list">
+          <div class="lb-item me">
+            <div class="lb-rank">12</div>
+            <div class="lb-av">K</div>
+            <div class="lb-info"><div class="lb-name">You (Keshav)</div><div class="lb-pts">780 pts</div></div>
+            <div class="lb-score">78%</div>
+          </div>
+          <div class="lb-item">
+            <div class="lb-rank">4</div>
+            <div class="lb-av">S</div>
+            <div class="lb-info"><div class="lb-name">Sunita D.</div><div class="lb-pts">950 pts</div></div>
+            <div class="lb-score">95%</div>
+          </div>
+          <div class="lb-item">
+            <div class="lb-rank">5</div>
+            <div class="lb-av">M</div>
+            <div class="lb-info"><div class="lb-name">Mohan L.</div><div class="lb-pts">930 pts</div></div>
+            <div class="lb-score">93%</div>
+          </div>
+        </div>
+        <div style="height:80px"></div>
+      </div>
+    </div>
+
+    <!-- DOUBTS PAGE -->
+    <div id="page-doubts" class="page">
+      <div class="page-header-bar">
+        <button class="back-btn" onclick="goBack()">←</button>
+        <h2>Doubt Forum 💬</h2>
+        <button class="icon-btn" onclick="showAskDoubt()">+</button>
+      </div>
+      <div class="scroll-content">
+        <div class="doubt-filter">
+          <button class="df-tab active">All</button>
+          <button class="df-tab">PA/SA</button>
+          <button class="df-tab">MTS</button>
+          <button class="df-tab">Postman</button>
+        </div>
+        <div class="doubt-post">
+          <div class="dp-header">
+            <div class="dp-av">R</div>
+            <div class="dp-info"><div class="dp-name">Ravi Kumar</div><div class="dp-time">2 hours ago · PA/SA</div></div>
+          </div>
+          <div class="dp-text">What is the minimum salary for PA grade? Is DA included in basic pay for promotion purposes?</div>
+          <div class="dp-footer">
+            <button class="dp-like">👍 12</button>
+            <button class="dp-reply">💬 Reply (3)</button>
+          </div>
+        </div>
+        <div class="doubt-post answered">
+          <div class="dp-header">
+            <div class="dp-av">S</div>
+            <div class="dp-info"><div class="dp-name">Sunita Sharma</div><div class="dp-time">1 day ago · MTS</div></div>
+          </div>
+          <div class="dp-text">Can someone explain Postal Order differences from Money Order?</div>
+          <div class="dp-answer">✅ Answered by Educator</div>
+          <div class="dp-footer">
+            <button class="dp-like">👍 24</button>
+            <button class="dp-reply">💬 Reply (8)</button>
+          </div>
+        </div>
+        <div style="height:80px"></div>
+      </div>
+    </div>
+
+    <!-- STUDY PLANNER PAGE -->
+    <div id="page-schedule" class="page">
+      <div class="page-header-bar">
+        <button class="back-btn" onclick="goBack()">←</button>
+        <h2>Study Planner 📅</h2>
+      </div>
+      <div class="scroll-content">
+        <div class="streak-card">
+          <div class="streak-left"><div class="streak-num">🔥 7</div><div class="streak-label">Day Streak</div></div>
+          <div class="streak-divider"></div>
+          <div class="streak-mid"><div class="streak-num">14 hrs</div><div class="streak-label">This Week</div></div>
+          <div class="streak-divider"></div>
+          <div class="streak-right"><div class="streak-num">85%</div><div class="streak-label">Goal Met</div></div>
+        </div>
+        <div class="week-days">
+          <div class="wd-day done">M<span>✓</span></div>
+          <div class="wd-day done">T<span>✓</span></div>
+          <div class="wd-day done">W<span>✓</span></div>
+          <div class="wd-day done">T<span>✓</span></div>
+          <div class="wd-day done">F<span>✓</span></div>
+          <div class="wd-day done">S<span>✓</span></div>
+          <div class="wd-day today">S<span>●</span></div>
+        </div>
+        <h4 class="section-label">Today's Plan</h4>
+        <div class="plan-item">
+          <div class="pi-check done">✓</div>
+          <div class="pi-info"><div class="pi-title">Mail Operations - Ch.5</div><div class="pi-meta">Video · 45 min</div></div>
+          <div class="pi-time done">Done</div>
+        </div>
+        <div class="plan-item">
+          <div class="pi-check done">✓</div>
+          <div class="pi-info"><div class="pi-title">Practice 20 MCQs</div><div class="pi-meta">Quiz · 30 min</div></div>
+          <div class="pi-time done">Done</div>
+        </div>
+        <div class="plan-item active" onclick="showPage('lesson')">
+          <div class="pi-check">○</div>
+          <div class="pi-info"><div class="pi-title">Savings Schemes</div><div class="pi-meta">Video · 55 min · Next up</div></div>
+          <div class="pi-time">3:00 PM</div>
+        </div>
+        <div class="plan-item" onclick="showPage('tests')">
+          <div class="pi-check">○</div>
+          <div class="pi-info"><div class="pi-title">Mock Test: PA/SA #4</div><div class="pi-meta">Test · 90 min</div></div>
+          <div class="pi-time">6:00 PM</div>
+        </div>
+        <div style="height:80px"></div>
+      </div>
+    </div>
+
+    <!-- MY COURSES PAGE -->
+    <div id="page-myCourses" class="page">
+      <div class="page-header-bar">
+        <button class="back-btn" onclick="goBack()">←</button>
+        <h2>My Courses</h2>
+      </div>
+      <div class="scroll-content">
+        <div class="my-course-card" onclick="showPage('lesson')">
+          <div class="mcc-thumb">📬</div>
+          <div class="mcc-info">
+            <div class="mcc-title">PA & SA Full Course</div>
+            <div class="progress-bar"><div class="progress-fill" style="width:42%"></div></div>
+            <div class="mcc-meta">42% · 5 of 12 chapters</div>
+          </div>
+          <button class="btn-primary small">Resume</button>
+        </div>
+        <div class="my-course-card" onclick="showPage('lesson')">
+          <div class="mcc-thumb">✉️</div>
+          <div class="mcc-info">
+            <div class="mcc-title">MTS Mock Tests Bundle</div>
+            <div class="progress-bar"><div class="progress-fill" style="width:60%"></div></div>
+            <div class="mcc-meta">60% · 18 of 30 tests</div>
+          </div>
+          <button class="btn-primary small">Resume</button>
+        </div>
+        <div style="height:80px"></div>
+      </div>
+    </div>
+
+    <!-- NOTIFICATIONS PAGE -->
+    <div id="page-notifications" class="page">
+      <div class="page-header-bar">
+        <button class="back-btn" onclick="goBack()">←</button>
+        <h2>Notifications 🔔</h2>
+      </div>
+      <div class="scroll-content">
+        <div class="notif-item unread">
+          <div class="notif-icon">🔥</div>
+          <div class="notif-body"><div class="notif-title">Daily Challenge Ready!</div><div class="notif-text">Today's 5-question challenge is live. Maintain your streak!</div><div class="notif-time">10 min ago</div></div>
+        </div>
+        <div class="notif-item unread">
+          <div class="notif-icon">📝</div>
+          <div class="notif-body"><div class="notif-title">New Mock Test Added</div><div class="notif-text">Inspector Post Full Mock 2024 is now available.</div><div class="notif-time">2 hours ago</div></div>
+        </div>
+        <div class="notif-item unread">
+          <div class="notif-icon">💬</div>
+          <div class="notif-body"><div class="notif-title">Doubt Answered</div><div class="notif-text">Your question about Speed Post was answered by the educator.</div><div class="notif-time">Yesterday</div></div>
+        </div>
+        <div class="notif-item">
+          <div class="notif-icon">🎉</div>
+          <div class="notif-body"><div class="notif-title">New Discount!</div><div class="notif-text">PA & SA combo is now 30% off. Limited time offer.</div><div class="notif-time">3 days ago</div></div>
+        </div>
+        <div style="height:80px"></div>
+      </div>
+    </div>
+
+    <!-- PROFILE PAGE -->
+    <div id="page-profile" class="page">
+      <div class="page-header-bar">
+        <button class="back-btn" onclick="goBack()">←</button>
+        <h2>My Profile</h2>
+        <button class="icon-btn">✏️</button>
+      </div>
+      <div class="scroll-content">
+        <div class="profile-hero">
+          <div class="profile-av-big">K</div>
+          <div class="profile-name">Keshav</div>
+          <div class="profile-sub">Postal Exam Aspirant</div>
+          <div class="profile-badges">
+            <span class="badge-pill">🔥 7 Day Streak</span>
+            <span class="badge-pill">📚 2 Courses</span>
+          </div>
+        </div>
+        <div class="profile-stats">
+          <div class="ps-item"><div class="ps-val">12</div><div class="ps-label">Tests</div></div>
+          <div class="ps-item"><div class="ps-val">78%</div><div class="ps-label">Avg Score</div></div>
+          <div class="ps-item"><div class="ps-val">42%</div><div class="ps-label">Progress</div></div>
+          <div class="ps-item"><div class="ps-val">780</div><div class="ps-label">Points</div></div>
+        </div>
+        <div class="profile-menu">
+          <div class="pm-item"><span>📋</span> Edit Profile</div>
+          <div class="pm-item"><span>📜</span> My Certificates</div>
+          <div class="pm-item"><span>💳</span> Purchase History</div>
+          <div class="pm-item"><span>🔔</span> Notification Settings</div>
+          <div class="pm-item"><span>🔒</span> Change Password</div>
+          <div class="pm-item" onclick="showPage('schedule')"><span>📅</span> Study Goals</div>
+          <div class="pm-item danger" onclick="showSplash()"><span>🚪</span> Logout</div>
+        </div>
+        <div style="height:80px"></div>
+      </div>
+    </div>
+
+  </div><!-- end pages -->
+
+  <!-- BOTTOM NAV -->
+  <nav class="bottom-nav">
+    <button class="bn-item active" onclick="showPage('home');setActive(this)">
+      <span class="bn-icon">🏠</span>
+      <span class="bn-label">Home</span>
+    </button>
+    <button class="bn-item" onclick="showPage('courses');setActive(this)">
+      <span class="bn-icon">📚</span>
+      <span class="bn-label">Courses</span>
+    </button>
+    <button class="bn-item" onclick="showPage('tests');setActive(this)">
+      <span class="bn-icon">📝</span>
+      <span class="bn-label">Tests</span>
+    </button>
+    <button class="bn-item" onclick="showPage('schedule');setActive(this)">
+      <span class="bn-icon">📅</span>
+      <span class="bn-label">Planner</span>
+    </button>
+    <button class="bn-item" onclick="showPage('profile');setActive(this)">
+      <span class="bn-icon">👤</span>
+      <span class="bn-label">Profile</span>
+    </button>
+  </nav>
+
+</div><!-- end app -->
+
+<script src="js/main.js"></script>
+</body>
+</html>
